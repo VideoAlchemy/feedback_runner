@@ -82,12 +82,21 @@ void drawFeedbackLayer() {
   updatePixels();
   baseLayer.updatePixels();
   imageMode(CENTER);
-  blendMode(BLEND);
+  blendMode(BLEND);//BLEND
   //image(baseLayer, location.y-(1/(location.y+1)), location.x, width*1.1, height);
-  image(baseLayer, mouse.y-(1/(mouse.y+1)), mouse.x, width*1.1, height);
-  //image(baseLayer, mouseY-(1/(mouseY+1)), mouseX, width*1.1, height);
-  image(img, location.x, location.y, img.width*(1+wAdjust), img.height*(1+hAdjust));
+  //image(baseLayer, mouse.y-(1/(mouse.y+1)), mouse.x, width*1.1, height);
+  pushMatrix();
+  translate(width/2, height/2);
+  rotate(.0001*millis());
+  image(baseLayer, mouse.y-(1/(mouse.y+1)), mouse.x, width*(1.05), height-50);
+  //blendMode(DIFFERENCE);//BLEND
+  image(baseLayer, mouseY-(1/(mouseY+1)), -mouseX, -width*1.1, height*1.1);
+  blendMode(DIFFERENCE);//BLEND
+  image(baseLayer, width-mouseX-(1/(mouseY+1)), height-mouseY, width*(.8), height*(.9));
+  image(img, location.x, location.y, img.width*(1+wAdjust)-50, img.height*(1+hAdjust)-50);
   //image(baseLayer, mouseY, mouseX, width*.8, height*.8);
+  blendMode(BLEND);//BLEND
+  popMatrix();
 }
 void drawRunner() {
   fill(255, 0, 0);
